@@ -1,0 +1,5 @@
+#!/bin/bash
+
+#PLAYING=$(ncmpcpp -q --current-song "%a - %t - %y")
+#echo "$PLAYING"
+conky -i 5 -c ~/scripts/conkytest

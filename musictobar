@@ -1,0 +1,3 @@
+#!/bin/bash
+
+mpc | head -n 1

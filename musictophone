@@ -1,0 +1,7 @@
+#!/bin/bash
+
+ALBUMLINK=$(sxiv -t -o /mnt/Rose/Music/Playlists)
+ALBUMPIC=$(readlink $ALBUMLINK)
+ALBUM=${ALBUMPIC%/*}
+echo $ALBUM
+mv "$ALBUM" /mnt/Joxer/Phone\ Music/

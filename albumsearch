@@ -1,0 +1,25 @@
+#!/bin/bash
+
+mus=$(echo "" | dmenu -p "Music Search: ")
+if [[ $mus != "" ]]
+then
+	SONG=$(mpc search any "$mus" | dmenu -l 20) 
+	if [[ $SONG != "" ]]
+	then
+		ALBUM=${SONG%/*}
+		echo $ALBUM | mpc insert; mpc next; mpc play
+		ARTDIR=$(echo "/mnt/Rose/Music/$ALBUM/")
+#		echo $ARTDIR
+		ART=$(ls "$ARTDIR"*.j* |head -n 1)
+		if [[ $ART == "" ]]
+		then
+#			echo -e "$ALBUM" >> ~/.GTD/needsalbumart
+			ALBUMNAME=${ALBUM##*/}
+			brave "https://duckduckgo.com/?q=$ALBUMNAME+album+cover&ia=images"
+			notify-send "$ALBUM"
+		fi
+		notify-send "$(echo -e " \n")" -i "$ART"
+		notify-send "$(mpc | head -n 1)"
+		pkill -RTMIN+11 dwmblocks
+	fi
+fi

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+GENRE=$(ls /mnt/Rose/Music/ | dmenu -l 20)
+ALBUMPIC=$(sxiv -t -o /mnt/Rose/Music/"$GENRE"*/*.j* /mnt/Rose/Music/"$GENRE"*/*/*.j* /mnt/Rose/Music/"$GENRE"*/*/*/*.j* /mnt/Rose/Music/"$GENRE"*/*/*/*/*.j*)
+echo -e "$ALBUMPIC" > /mnt/Rose/Music/Playlists/templist
+while read line;
+do
+
+ln -s "$line" /mnt/Rose/Music/Playlists/"$(date +%d%m%y%H%M%S%N)"
+
+done </mnt/Rose/Music/Playlists/templist
+

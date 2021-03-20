@@ -1,0 +1,11 @@
+#!/bin/bash
+
+GENRE=$(ls /mnt/Rose/Music/ | dmenu -l 20)
+#ARTIST=$(ls /mnt/Rose/Music/"$GENRE" | dmenu -l 20)
+#ALBUMPIC=$(sxiv -t -o -r /mnt/Rose/Music/"$GENRE"/"$ARTIST")
+#ALBUMPIC=$(sxiv -t -o -r /mnt/Rose/Music/"$GENRE")
+ALBUMPIC=$(sxiv -t -o -r /mnt/Rose/Music/"$GENRE"*/*.j* /mnt/Rose/Music/"$GENRE"*/*/*.j* /mnt/Rose/Music/"$GENRE"*/*/*/*.j* /mnt/Rose/Music/"$GENRE"*/*/*/*/*.j*)
+ALBUM=${ALBUMPIC%/*}
+ONLYALBUM=$(echo $ALBUM | sed 's/\/mnt\/Rose\/Music\///')
+echo $ONLYALBUM | mpc insert; mpc next; mpc play
+pkill -RTMIN+11 dwmblocks

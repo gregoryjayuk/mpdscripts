@@ -1,0 +1,12 @@
+#!/bin/bash
+
+ALBUMLINK=$(sxiv -t -o /mnt/Rose/Music/Playlists)
+ALBUMPIC=$(readlink $ALBUMLINK)
+ALBUM=${ALBUMPIC%/*}
+ONLYALBUM=$(echo $ALBUM | sed 's/\/mnt\/Rose\/Music\///')
+echo $ONLYALBUM | mpc insert; mpc next; mpc play
+notify-send -i "$ALBUMPIC" " "
+notify-send "$(mpc | head -n 1)"
+pkill -RTMIN+11 dwmblocks
+
+
